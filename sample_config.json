@@ -1,0 +1,5 @@
+{
+  "bucket": "s3-bucket-name",
+  "prefix": "optional/key/prefix",
+  "start_date": "2020-01-01T00:00:00+00:00"
+}

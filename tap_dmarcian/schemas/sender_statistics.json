@@ -1,0 +1,131 @@
+{
+  "type": [
+    "null",
+    "object"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "h_from": {
+      "description": "The Header-From column contains the 'DMARC domain' of the row of data.  The DMARC domain is the domain found in the From: header of a piece of email.",
+      "type": "string"
+    },
+    "ip": {
+      "description": "IP corresponds to the Internet Protocol Address of the source of email represented by the row.  This IP address was responsible for sending (or attempting to send) email to a DMARC-enabled email receiver.",
+      "type": "string"
+    },
+    "ptr": {
+      "description": "The PTR represents the hostname of the source server of the email represented by the row.  dmarcian adds this information by performing a PTR lookup (also known as a Reverse DNS Lookup) of the IP address (see above).",
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "ptr_org": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "example": "amazonses.com"
+    },
+    "slug": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "example": "amazonses"
+    },
+    "cc": {
+      "description": "CC is the Country Code of the country where the server responsible for the email represented by the row is located.  CC is added by dmarcian and is reliable, but not always perfectly accurate.",
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "count": {
+      "description": "Count contains the total number of emails received by DMARC-enabled receivers that match the row of data.",
+      "type": "integer"
+    },
+    "disp": {
+      "description": "Policy-Applied- Policy-applied describes the DMARC policy that was applied to the emails represented by the row of data, if any.   “None” is present if no policy was applied (as the email was deemed to be compliant with DMARC), otherwise “quarantine” or “reject” are present.",
+      "type": "string",
+      "enum": [
+        "n",
+        "q",
+        "r"
+      ]
+    },
+    "reason": {
+      "description": "OverrideReason- DMARC-enabled email receivers can choose to not apply a domain’s public DMARC policy if the email receiver determines that the email arrived due an exceptional circumstance.  Exceptions are rare and, if present, are described in this column.",
+      "type": "string",
+      "enum": [
+        "f",
+        "n",
+        "p",
+        "s"
+      ]
+    },
+    "dkim_policy": {
+      "description": "DKIM_Alignment- DMARC uses DKIM to determine the legitimacy of a piece of email.  If a piece of email contains a valid DKIM-Signature and is relevant to the Header-From (see above), then the email is considered to be compliant with DMARC.  If no DKIM-Signature is present or if a DKIM-Signature references a domain other than that of the Header-From, the DKIM-Signature is not relevant to DMARC compliance.",
+      "type": "string",
+      "enum": [
+        "p",
+        "f"
+      ]
+    },
+    "dkim_res": {
+      "description": "DKIM_Result- The result of processing a DKIM-Signature – regardless of the signature’s relevance to DMARC compliance – is found in this column.",
+      "type": "string",
+      "enum": [
+        "+",
+        "-",
+        "n",
+        "p"
+      ]
+    },
+    "dkim_d": {
+      "description": "DKIM_Domain- The domain of the DKIM-Signature.",
+      "type": "string"
+    },
+    "spf_policy": {
+      "description": "SPF_Alignment- DMARC uses SPF to determine the legitimacy of a piece of email.  If SPF is in place and the domain checked by SPF is relevant to the Header-From (see above), then the email is considered to be compliant with DMARC.  If SPF is not present or if the domain checked by SPF references a domain other than that of the Header-From, the result of SPF checking is not relevant to DMARC compliance.",
+      "type": "string",
+      "enum": [
+        "p",
+        "f"
+      ]
+    },
+    "spf_res": {
+      "description": "SPF_Result- The result of processing SPF – regardless of the relevance to DMARC compliance – is found in this column.",
+      "type": "string",
+      "enum": [
+        "?",
+        "~",
+        "+",
+        "-",
+        "n",
+        "p"
+      ]
+    },
+    "spf_d": {
+      "description": "SPF_Domain- The domain that SPF checked.  SPF checks the domain of the envelope-address (also known as the bounce address).",
+      "type": "string"
+    },
+    "category": {
+      "type": "integer"
+    },
+    "end_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "report_id": {
+      "type": "string"
+    },
+    "report_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "row_id": {
+      "type": "integer"
+    }
+  }
+}
