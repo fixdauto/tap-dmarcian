@@ -96,15 +96,16 @@ def sync(config, state, catalog):
                     continue
 
                 LOGGER.debug("Reading report %s", key)
-                report_id = key[len(prefix)+1 if prefix else 0:].split('/')[1]
-                date = f"{m[1]}T00:00:00.000+00:00"
+                parts = key[len(prefix)+1 if prefix else 0:].split('/')
+                date = parts[0]
+                report_id = parts[1]
 
                 s3_object = s3.get_object(Bucket=bucket, Key=key)
                 data = json.loads(s3_object['Body'].read())
                 rows = []
                 for i, row in enumerate(data):
                     row['report_id'] = report_id
-                    row['report_date'] = date
+                    row['report_date'] = m[1]
                     row['row_id'] = i
                     rows.append(row)
 
